@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventix - Detalle del Salón</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="detail-card-container">
+
+        <h1 id="det-nombre" class="detail-main-title">Cargando salón...</h1>
+
+        <div class="detail-images-row">
+            <img id="det-img1" src="" class="det-thumb" alt="Foto 1">
+            <img id="det-img2" src="" class="det-thumb" alt="Foto 2">
+        </div>
+
+        <div class="det-meta">
+            <p>
+                <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                <span id="det-ubicacion"></span>
+            </p>
+            <p>
+                <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                <span id="det-capacidad"></span>
+            </p>
+            <p class="det-stars">
+                <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                <span id="det-rating"></span>
+            </p>
+        </div>
+
+        <h3 class="purple-sub">Tipos de eventos</h3>
+        <div class="det-event-tags">
+            <span class="gray-tag">Casamiento</span>
+            <span class="gray-tag">Fiestas de egresados</span>
+            <span class="gray-tag">Quinceaños</span>
+        </div>
+
+        <div id="det-precios" class="det-price-range">...</div>
+
+        <h3 class="purple-sub">Descripción</h3>
+        <p id="det-descripcion" class="det-desc-text"></p>
+
+        <div class="det-features-grid">
+            <div>
+                <h3 class="purple-sub">Servicios incluidos</h3>
+                <ul id="det-servicios" class="check-list"></ul>
+            </div>
+            <div>
+                <h3 class="purple-sub">Comodidades</h3>
+                <ul id="det-comodidades" class="check-list"></ul>
+            </div>
+        </div>
+
+        <footer class="det-footer">
+            <a href="index.html" class="btn-det-back">
+                <img src="images/logoeventix.png" alt="ícono logo" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                Volver al inicio
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+
+            const queryString = window.location.search;
+            let salonId = 1; 
+            if (queryString.includes('id=')) {
+                salonId = queryString.split('id=')[1];
+            }
+
+            try {
+                const respuesta = await fetch(`http://localhost:3000/api/salones/${salonId}`);
+
+                if (!respuesta.ok) {
+                    document.getElementById('det-nombre').textContent = "Error al cargar la información";
+                    return;
+                }
+
+                const salon = await respuesta.json();
+
+                if (salon) {
+                    document.getElementById('det-nombre').textContent = salon.nombre || 'Sin nombre';
+                    document.getElementById('det-img1').src = salon.imagen || '';
+                    document.getElementById('det-img2').src = salon.imagen2 || salon.imagen || '';
+
+                    document.getElementById('det-ubicacion').textContent = salon.ubicacion || 'Sin ubicación';
+                    document.getElementById('det-capacidad').textContent = salon.capacidad || 'Sin capacidad';
+
+                    const resenasTexto = salon.resenas ? `(${salon.resenas})` : '(Sin reseñas)';
+                    document.getElementById('det-rating').textContent = `${salon.rating || 0} ${resenasTexto}`;
+
+                    document.getElementById('det-precios').textContent = salon.precios || 'Consultar precio';
+                    document.getElementById('det-descripcion').textContent = salon.descripcion || 'Sin descripción disponible.';
+
+                    const listaServicios = document.getElementById('det-servicios');
+                    listaServicios.innerHTML = '';
+                    if (salon.servicios && salon.servicios.trim() !== "") {
+                        salon.servicios.split(',').forEach(s => {
+                            listaServicios.innerHTML += `<li><img src="images/tilde.png" alt="ícono check" class="icon-img" style="width:14px;height:14px;vertical-align:middle;"> ${s.trim()}</li>`;
+                        });
+                    } else {
+                        listaServicios.innerHTML = `<li>No hay servicios especificados</li>`;
+                    }
+
+                    const listaComodidades = document.getElementById('det-comodidades');
+                    listaComodidades.innerHTML = '';
+                    if (salon.comodidades && salon.comodidades.trim() !== "") {
+                        salon.comodidades.split(',').forEach(c => {
+                            listaComodidades.innerHTML += `<li><img src="images/tilde.png" alt="ícono check" class="icon-img" style="width:14px;height:14px;vertical-align:middle;"> ${c.trim()}</li>`;
+                        });
+                    } else {
+                        listaComodidades.innerHTML = `<li>No hay comodidades especificadas</li>`;
+                    }
+                }
+            } catch (error) {
+                console.error("Detalle de error al cargar el salón:", error);
+                document.getElementById('det-nombre').textContent = "Error al cargar la información";
+            }
+        });
+    </script>
+</body>
+</html>

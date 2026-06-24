@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventix - Organiza el evento perfecto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="nav-brand">
+        <img src="images/logoeventix.png" alt="ícono logo" class="icon-img" style="width:24px;height:24px;vertical-align:middle;">
+        <span>Eventix</span>
+    </div>
+    <div class="nav-actions">
+        <span class="menu-toggle">
+            <img src="images/iconomenu.png" alt="ícono menú" class="icon-img" style="width:25px;height:25px;vertical-align:middle;">
+        </span>
+        <a href="usuario.html" class="user-profile">
+            <img src="images/iconousuario.png" alt="ícono usuario" class="icon-img" style="width:28px;height:28px;vertical-align:middle;">
+        </a>
+    </div>
+</header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Organiza el evento perfecto</h1>
+            <p>Encuentra salones de eventos y todos los servicios que necesitas en un solo lugar</p>
+
+            <div class="tag-container">
+                <span class="event-tag">Cumpleaños</span>
+                <span class="event-tag">Eventos corporativos</span>
+                <span class="event-tag">Casamientos</span>
+                <span class="event-tag">Fiestas de egresados</span>
+                <span class="event-tag">Quinceaños</span>
+            </div>
+        </div>
+    </section>
+    <section class="search-section">
+        <h2>Buscar salones</h2>
+        <div class="search-grid">
+            <div class="form-group">
+                <label>
+                    <img src="images/buscaricono.png" alt="ícono buscar" class="icon-img" style="width:18px;height:18px;vertical-align:middle;">
+                    Buscar
+                </label>
+                <input type="text" id="searchName" placeholder="Nombre del salón...">
+            </div>
+            <div class="form-group highlighted-filter">
+                <label>
+                    <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:18px;height:18px;vertical-align:middle;">
+                    Capacidad
+                </label>
+                <div class="select-wrapper">
+                    <select id="filterCapacity">
+                        <option value="todos">Todas</option>
+                        <option value="hasta150">Hasta 150 personas</option>
+                        <option value="hasta250">De 150 a 250 personas</option>
+                        <option value="mas250">Más de 250 personas</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <img src="images/logoeventix.png" alt="ícono tipo de evento" class="icon-img" style="width:18px;height:18px;vertical-align:middle;">
+                    Tipo de evento
+                </label>
+                <div class="select-wrapper">
+                    <select id="filterType">
+                        <option value="todos">Todos</option>
+                        <option value="cumpleanos">Cumpleaños</option>
+                        <option value="corporativo">Eventos corporativos</option>
+                        <option value="casamiento">Casamientos</option>
+                        <option value="egresados">Fiestas de egresados</option>
+                        <option value="quince">Quinceaños</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>
+                    <img src="images/presupuesto.png" alt="ícono presupuesto" class="icon-img" style="width:18px;height:18px;vertical-align:middle;">
+                    Presupuesto
+                </label>
+                <div class="select-wrapper">
+                    <select id="filterBudget">
+                        <option value="todos">Todos</option>
+                        <option value="bajo">Económico</option>
+                        <option value="medio">Estándar</option>
+                        <option value="alto">Premium</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section">
+    <h2 class="results-title">Salones encontrados: <span id="countNum">8</span></h2>
+
+    <div class="cards-grid">
+        <a href="detalle.html?id=1" class="card-link-wrapper">
+            <div class="venue-card" data-id="1" data-name="salon gran milazzo" data-capacity="250" data-event="casamiento,corporativo,cumpleanos" data-budget="alto">
+                <button class="fav-btn" onclick="toggleFavorito(event, 1, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/granmilazzo.webp" alt="salon Gran Milazzo" class="card-img">
+                <div class="card-body">
+                    <h3>Salón Gran Milazzo</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Guaymallén, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 80 a 250 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.5 <span>(1.058 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Catering incluido</span>
+                        <span class="card-tag">Luces LED</span>
+                        <span class="card-tag">Seguridad</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=2" class="card-link-wrapper">
+            <div class="venue-card" data-id="2" data-name="palatium" data-capacity="180" data-event="casamiento,quince,egresados" data-budget="alto">
+                <button class="fav-btn" onclick="toggleFavorito(event, 2, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/palatium.webp" alt="salon palatium" class="card-img">
+                <div class="card-body">
+                    <h3>Palatium</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Las Heras, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 50 a 180 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.4 <span>(1.724 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Catering</span>
+                        <span class="card-tag">Musicalización</span>
+                        <span class="card-tag">Decoraciones</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=3" class="card-link-wrapper">
+            <div class="venue-card" data-id="3" data-name="marques de montecristo" data-capacity="120" data-event="cumpleanos,egresados,quince" data-budget="bajo">
+                <button class="fav-btn" onclick="toggleFavorito(event, 3, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/marques.webp" alt="Retrato del Marqués de Sade o imagen representativa del marqués" class="card-img">
+                <div class="card-body">
+                    <h3>Marqués De Montecristo</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Maipú, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 40 a 120 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        3.8 <span>(2.670 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Catering</span>
+                        <span class="card-tag">DJ incluido</span>
+                        <span class="card-tag">Organización</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=4" class="card-link-wrapper">
+            <div class="venue-card" data-id="4" data-name="quinta fermina eventos" data-capacity="350" data-event="casamiento,corporativo,cumpleanos,quince" data-budget="medio">
+                <button class="fav-btn" onclick="toggleFavorito(event, 4, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/quintafer.webp" alt="Quinta" class="card-img">
+                <div class="card-body">
+                    <h3>Quinta Fermina Eventos</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Luján de Cuyo, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 100 a 350 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.4 <span>(469 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Atención personalizada</span>
+                        <span class="card-tag">Banquetaría</span>
+                        <span class="card-tag">Ambiente climatizado</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=5" class="card-link-wrapper">
+            <div class="venue-card" data-id="5" data-name="el marquez eventos" data-capacity="300" data-event="casamiento,corporativo,quince" data-budget="medio">
+                <button class="fav-btn" onclick="toggleFavorito(event, 5, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/marquez.webp" alt="Marquez" class="card-img">
+                <div class="card-body">
+                    <h3>El Marquez Eventos</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Villanueva, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 300 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.5 <span>(228 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Estacionamiento</span>
+                        <span class="card-tag">Mozos</span>
+                        <span class="card-tag">Salón climatizado</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=6" class="card-link-wrapper">
+            <div class="venue-card" data-id="6" data-name="la oliva eventos" data-capacity="200" data-event="casamiento,cumpleanos" data-budget="medio">
+                <button class="fav-btn" onclick="toggleFavorito(event, 6, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/oliva.webp" alt="La Oliva Eventos" class="card-img">
+                <div class="card-body">
+                    <h3>La Oliva Eventos</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Maipú, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 200 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.5 <span>(634 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Jardín</span>
+                        <span class="card-tag">Excelencia gastronómica</span>
+                        <span class="card-tag">Ambiente climatizado</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=7" class="card-link-wrapper">
+            <div class="venue-card" data-id="7" data-name="finca martinez" data-capacity="150" data-event="corporativo,cumpleanos,egresados" data-budget="bajo">
+                <button class="fav-btn" onclick="toggleFavorito(event, 7, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/finca.webp" alt="Finca Martinez" class="card-img">
+                <div class="card-body">
+                    <h3>Finca Martinez</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Maipú, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 150 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.7 <span>(1.683 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Wifi de alta velocidad</span>
+                        <span class="card-tag">Barra de bebidas</span>
+                        <span class="card-tag">Coordinación evento</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="detalle.html?id=8" class="card-link-wrapper">
+            <div class="venue-card" data-id="8" data-name="luna eventos" data-capacity="350" data-event="casamiento,quince,egresados" data-budget="alto">
+                <button class="fav-btn" onclick="toggleFavorito(event, 8, this)">
+                    <img src="images/corazon.png" alt="ícono favorito" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+                    Guardar
+                </button>
+                <img src="images/luna.webp" alt="Luna Eventos" class="card-img">
+                <div class="card-body">
+                    <h3>Luna Eventos</h3>
+                    <p class="location">
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capital, Mendoza
+                    </p>
+                    <p class="capacity">
+                        <img src="images/personas.png" alt="ícono capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Capacidad: 350 personas
+                    </p>
+                    <div class="rating">
+                        <img src="images/estrella.png" alt="ícono calificación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        4.5 <span>(300 reseñas)</span>
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag">Organización y coordinación</span>
+                        <span class="card-tag">Barra libre</span>
+                        <span class="card-tag">Fotografía y video</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+    <section class="services-section">
+    <h2 class="services-title">Servicios complementarios</h2>
+    <p class="services-subtitle">Organiza tu evento completo desde un solo lugar. Todos los servicios que necesitas.</p>
+
+    <div class="services-grid">
+
+        <a href="catering.html" class="service-card-link">
+            <div class="service-card-detail" style="padding: 20px; text-align: center;">
+                <img src="images/abastecimiento.png" alt="ícono catering" class="icon-img" style="width:60px;height:60px;">
+                <h3 style="font-size: 1.2em; border: none; padding: 0; text-align: center; color: #6a1b9a;">Catering</h3>
+                <p style="font-size: 0.9em; color: #555;">Menús personalizados, servicio de barra, pastelería profesional</p>
+            </div>
+        </a>
+
+        <a href="musica.html" class="service-card-link">
+            <div class="service-card-detail" style="padding: 20px; text-align: center;">
+                <img src="images/musica.png" alt="ícono música" class="icon-img" style="width:65px;height:65px;">
+                <h3 style="font-size: 1.2em; border: none; padding: 0; text-align: center; color: #6a1b9a;">Música</h3>
+                <p style="font-size: 0.9em; color: #555;">DJs, bandas en vivo, equipos de sonido profesional</p>
+            </div>
+        </a>
+
+        <a href="animacion.html" class="service-card-link">
+            <div class="service-card-detail" style="padding: 20px; text-align: center;">
+                <img src="images/animación.png" alt="ícono animación" class="icon-img" style="width:60px;height:60px;">
+                <h3 style="font-size: 1.2em; border: none; padding: 0; text-align: center; color: #6a1b9a;">Animación</h3>
+                <p style="font-size: 0.9em; color: #555;">Shows, animadores, payasos, magia para todas las edades</p>
+            </div>
+        </a>
+
+        <a href="seguridad.html" class="service-card-link">
+            <div class="service-card-detail" style="padding: 20px; text-align: center;">
+                <img src="images/seguridad.png" alt="ícono seguridad" class="icon-img" style="width:75px;height:75px;">
+                <h3 style="font-size: 1.2em; border: none; padding: 0; text-align: center; color: #6a1b9a;">Seguridad</h3>
+                <p style="font-size: 0.9em; color: #555;">Personal de seguridad profesional, control de acceso</p>
+            </div>
+        </a>
+
+        <a href="mobiliario.html" class="service-card-link">
+            <div class="service-card-detail" style="padding: 20px; text-align: center;">
+                <img src="images/sillon.png" alt="ícono mobiliario" class="icon-img" style="width:60px;height:60px;">
+                <h3 style="font-size: 1.2em; border: none; padding: 0; text-align: center; color: #6a1b9a;">Mobiliario</h3>
+                <p style="font-size: 0.9em; color: #555;">Alquiler de sillas, mesas, manteles, decoración</p>
+            </div>
+        </a>
+
+        <a href="fotografia.html" class="service-card-link">
+            <div class="service-card-detail" style="padding: 20px; text-align: center;">
+                <img src="images/fotografia.png" alt="ícono fotografía" class="icon-img" style="width:70px;height:70px;">
+                <h3 style="font-size: 1.2em; border: none; padding: 0; text-align: center; color: #6a1b9a;">Fotografía</h3>
+                <p style="font-size: 0.9em; color: #555;">Fotógrafos, video, cabina de fotos, drones</p>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-brand">
+                    <img src="images/logoeventix.png" alt="ícono logo" class="icon-img" style="width:20px;height:20px;vertical-align:middle;">
+                    <span>Eventix</span>
+                </div>
+                <p>Tu plataforma de confianza para organizar eventos inolvidables.</p>
+                <div class="footer-types">
+                    <h4>Tipos de eventos</h4>
+                    <ul>
+                        <li>Casamientos</li>
+                        <li>Cumpleaños</li>
+                        <li>Fiestas de egresados</li>
+                        <li>Eventos corporativos</li>
+                        <li>Quinceaños</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-col right-align">
+                <div class="footer-nav">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="comofunciona.html">¿Cómo funciona?</a></li>
+                        <li><a href="favoritos.html">Favoritos</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p>
+                        <img src="images/correo.png" alt="ícono email" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Eventixinfo@gmail.com
+                    </p>
+                    <p>
+                        <img src="images/telefono.png" alt="ícono teléfono" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        +54 261 390 4697
+                    </p>
+                    <p>
+                        <img src="images/ubicacion.png" alt="ícono ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;">
+                        Guaymallén, Mendoza
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>2026 Eventix. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="mobileMenu" class="mobile-nav-overlay">
+        <div class="mobile-menu-content">
+            <span id="closeMenuBtn">
+                <img src="images/cruz.png" alt="ícono cerrar" class="icon-img" style="width:16px;height:16px;vertical-align:middle;">
+            </span>
+            <a href="favoritos.html">Favoritos</a>
+            <a href="comofunciona.html">Cómo funciona</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

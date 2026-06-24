@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventix - Mis Favoritos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="favorites-container">
+        <header class="favorites-header">
+            <div class="logo">
+                <img src="images/logoeventix.png" alt="logo" class="icon-img" style="width:20px;height:20px;vertical-align:middle;">
+                Eventix
+            </div>
+            <h1>Mis favoritos</h1>
+            <p class="subtitle">Salones que guardaste para revisar más tarde</p>
+        </header>
+
+        <main id="espacio-tarjetas">
+            <div class="favorites-card">
+                <div class="heart-icon">
+                    <img src="images/corazon.png" alt="favorito" class="icon-img" style="width:40px;height:40px;">
+                </div>
+                <h2>No tienes favoritos aún</h2>
+                <p>Explora salones y guarda tus preferidos</p>
+                <a href="index.html" class="btn-explore">Explorar salones</a>
+            </div>
+        </main>
+
+        <footer class="favorites-footer">
+            <a href="index.html" class="btn-back">
+                <img src="images/logoeventix.png" alt="logo" class="icon-img" style="width:16px;height:16px;vertical-align:middle;"> Volver al inicio
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const espacio = document.getElementById('espacio-tarjetas');
+
+            try {
+                const respuesta = await fetch('/api/favoritos');
+                const salones = await respuesta.json();
+
+                if (salones.length > 0) {
+                    
+                    espacio.innerHTML = '<div class="cards-grid"></div>';
+                    const grilla = espacio.querySelector('.cards-grid');
+
+                    salones.forEach(salon => {
+                        grilla.innerHTML += `
+                            <div class="venue-card">
+                                <img src="${salon.imagen}" class="card-img">
+                                <div class="card-body">
+                                    <h3>${salon.nombre}</h3>
+                                    <p><img src="images/ubicacion.png" alt="ubicación" class="icon-img" style="width:14px;height:14px;vertical-align:middle;"> ${salon.ubicacion}</p>
+                                    <p><img src="images/personas.png" alt="capacidad" class="icon-img" style="width:14px;height:14px;vertical-align:middle;"> ${salon.capacidad}</p>
+                                    <div class="rating"><img src="images/estrella.png" alt="rating" class="icon-img" style="width:14px;height:14px;vertical-align:middle;"> ${salon.rating}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (error) {
+                console.error('Error al pintar los favoritos:', error);
+            }
+        });
+    </script>
+
+</body>
+</html>

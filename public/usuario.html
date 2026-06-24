@@ -1,0 +1,136 @@
+<<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventix - Acceso</title>
+    <link rel="stylesheet" href="usuario.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="logo-circle">
+            <img src="images/logoeventix.png" alt="logo" class="icon-img" style="width:40px;height:40px;">
+        </div>
+        <h2>Eventix</h2>
+        <p>Tu plataforma de eventos</p>
+
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="cambiarForm('login')">INICIAR SESIÓN</button>
+                <button class="tab-btn" onclick="cambiarForm('registro')">REGISTRARSE</button>
+            </div>
+
+            <form id="form-login" onsubmit="iniciarSesion(event)">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="login-email" placeholder="Ingresa tu email..." required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-password" placeholder="********" required>
+                </div>
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+
+            <form id="form-registro" class="hidden" onsubmit="guardarRegistro(event)">
+                <div class="input-group">
+                    <label>Nombre</label>
+                    <input type="text" id="registro-nombre" placeholder="Tu nombre completo..." required>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="registro-email" placeholder="Tu correo electrónico..." required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="registro-password" placeholder="Crea una contraseña..." required>
+                </div>
+                <button type="submit" class="btn-primary">Registrarse</button>
+            </form>
+        </div>
+
+        <a href="index.html" class="btn-back">
+            <img src="images/logoeventix.png" alt="inicio" class="icon-img" style="width:16px;height:16px;vertical-align:middle;"> Volver al inicio
+        </a>
+    </div>
+
+    <script>
+        function cambiarForm(tipo) {
+            const login = document.getElementById('form-login');
+            const registro = document.getElementById('form-registro');
+            const botones = document.querySelectorAll('.tab-btn');
+
+            if (tipo === 'login') {
+                login.classList.remove('hidden');
+                registro.classList.add('hidden');
+                botones[0].classList.add('active');
+                botones[1].classList.remove('active');
+            } else {
+                login.classList.add('hidden');
+                registro.classList.remove('oculto'); 
+                registro.classList.remove('hidden');
+                botones[1].classList.add('active');
+                botones[0].classList.remove('active');
+            }
+        }
+
+        async function guardarRegistro(event) {
+            event.preventDefault(); 
+
+            const nombre = document.getElementById('registro-nombre').value;
+            const email = document.getElementById('registro-email').value;
+            const password = document.getElementById('registro-password').value;
+
+            try {
+                const respuesta = await fetch('/api/registro', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre, email, password })
+                });
+
+                const datos = await respuesta.json();
+
+                if (datos.status === 'success') {
+                    alert('¡Usuario registrado exitosamente!');
+                    document.getElementById('form-registro').reset();
+                    cambiarForm('login');
+                } else {
+                    alert(datos.message || 'Ocurrió un error al registrarse.');
+                }
+            } catch (error) {
+                console.error('Error de conexión:', error);
+                alert('No se pudo conectar con el servidor.');
+            }
+        }
+
+        async function iniciarSesion(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const respuesta = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const datos = await respuesta.json();
+
+                if (datos.status === 'success') {
+                    alert('¡Inicio de sesión exitoso! Bienvenido de nuevo, ' + datos.nombre);
+                    window.location.href = 'index.html'; 
+                } else {
+                    alert(datos.message || 'Email o contraseña incorrectos.');
+                }
+            } catch (error) {
+                console.error('Error de conexión:', error);
+                alert('No se pudo conectar con el servidor.');
+            }
+        }
+    </script>
+
+</body>
+</html>
